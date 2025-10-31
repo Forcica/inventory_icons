@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Inventory Icons</title>
+
+  <style>
+    body {
+      background: #1a1a1a;
+      color: #ddd;
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #888;
+      margin: 0;
+    }
+
+    #count {
+      font-size: .8rem;
+      color: #555;
+      background: #000;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: .25rem .5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 2rem;
+    }
+
+    .item {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .thumb-wrap {
+      background: #000;
+      border-radius: 4px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .thumb-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      image-rendering: pixelated;
+    }
+
+    .filename {
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-top: 0.75rem;
+      word-break: break-word;
+      line-height: 1.2;
+    }
+
+    .techname {
+      font-size: 0.6rem;
+      color: #444;
+      margin-top: 0.25rem;
+      word-break: break-all;
+      line-height: 1.2;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Inventory Icons</h1>
+    <div id="count"></div>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <!-- Ton objet ici -->
+  <script type="module">
+    const data = {
+      keywords: [
+        "Shiranui",
+        "Amatsu",
+        "Bakuryu",
+        "Bakuzan",
+        "Daichi",
+        "Enrai",
+        "Fujino",
+        "Gankou",
+        "Genbu",
+        "Gouka",
+        "Habakiri",
+        "Haruka",
+        "Hinomaru",
+        "Jinrai",
+        "Kagerou",
+        "Kakushi",
+        "Kaminari",
+        "Kokuno",
+        "Koumori",
+        "Kurayamino",
+        "Kurohigi",
+        "Kusanagi",
+        "Mikazuki",
+        "Mizuno",
+        "Nakigitsune",
+        "Nekono",
+        "Noken",
+        "Onibi",
+        "Sakana",
+        "Shingetsu",
+        "Suzumebachi",
+        "Taimatsu",
+        "Tetsugan",
+        "Tobizaru",
+        "Touketsu",
+        "Usuba",
+        "Yamainu",
+        "Yamikiri",
+        "Yukionna",
+        "Argent",
+        "Classic 7",
+        "Classic 21",
+        "Grimm",
+        "Hashiman",
+        "Kana",
+        "Matsu",
+        "Mari",
+        "Mizu no Kagami",
+        "Mokuhana",
+        "Suzaku no Mai",
+        "Yurei",
+        "Tachikiri",
+        "Guren",
+        "Hoshigami",
+        "Szay",
+        "Ulqui",
+        "Uno Ban",
+        "Yubashiri",
+        "Zaraki",
+        "Byakuya",
+        "Classique 1",
+        "Classique 2",
+        "Classique 3",
+        "Classique 4",
+        "Classique 5",
+        "Classique 6",
+        "Classique 8",
+        "Classique 9 Évolué",
+        "Classique 10",
+        "lance classique 1",
+        "du Premier Serment",
+        "Epee du Premier Serment",
+        "Shiba",
+        "Dague Event",
+        "Marteau Natx",
+        "Corben",
+        "Jugram Haschwalth",
+        "Seiryu",
+        "Suisen",
+        "Gekko",
+        "Fushikiri",
+        "Masamune",
+        "Zetsumei",
+        "Satsuriku",
+        "Rivière Sanglante",
+        "Kurozetsu"
+      ],
+      icons: {
+        "Amatsu": "amatsu.png",
+        "Argent": "argent.png",
+        "Bakuryu": "bakuryu.png",
+        "Bakuzan": "bakuzan_01.png",
+        "Byakuya": "byakuya.png",
+        "Classic 7": "classic_wep_7.png",
+        "Classic 21": "classic_wep_21.png",
+        "Classique 1": "classic_wep_1.png",
+        "Classique 2": "classic_wep_2.png",
+        "Classique 3": "classic_wep_3.png",
+        "Classique 4": "classic_wep_4.png",
+        "Classique 5": "classic_wep_5.png",
+        "Classique 6": "classic_wep_6.png",
+        "Classique 8": "classic_wep_8.png",
+        "Classique 9 Évolué": "classic_wep_9_evo.png",
+        "Classique 10": "classic_wep_10.png",
+        "Daichi": "daichi.png",
+        "Enrai": "enrai.png",
+        "Fujino": "fujino.png",
+        "Gankou": "gankou.png",
+        "Genbu": "genbu.png",
+        "Gouka": "gouka.png",
+        "Grimm": "grimmjow_wep_1.png",
+        "Habakiri": "habakiri.png",
+        "Haruka": "haruka.png",
+        "Hashiman": "hashiman.png",
+        "Hinomaru": "hinomaru.png",
+        "Hoshigami": "hoshigami.png",
+        "Jinrai": "jinrai.png",
+        "Jugram Haschwalth": "jugram_haschwalth.png",
+        "Kagerou": "kagerou_01.png",
+        "Kakushi": "kakushi_01.png",
+        "Kaminari": "kaminari.png",
+        "Kana": "kaname_wep_1.png",
+        "Kataneg_wcp_7_shini": "kataneg_wep_7_shini.png",
+        "Kokuno": "kokuno.png",
+        "Koumori": "koumori.png",
+        "Kurayamino": "kurayamino.png",
+        "Kurohigi": "kurohigi_bw.png",
+        "Kusanagi": "kusanagi_01.png",
+        "Matsu": "matsu.png",
+        "Mari": "mari.png",
+        "Mikazuki": "mikazuki.png",
+        "Mizuno": "mizu_no_kagami.png",
+        "Mizu no Kagami": "mizu_no_kagami.png",
+        "Mokuhana": "mokuhana.png",
+        "Nakigitsune": "nakigitsune.png",
+        "Nekono": "nekono.png",
+        "Noken": "noken.png",
+        "Onibi": "onibi.png",
+        "Sakana": "sakana.png",
+        "Seiryu": "seiryu.png",
+        "Shiba": "shiba.png",
+        "Shingetsu": "shingetsu.png",
+        "Shiranui": "shiranui.png",
+        "Suzaku no Mai": "suzaku_no_mai.png",
+        "Suzumebachi": "suzumebachi.png",
+        "Suisen": "suisen.png",
+        "Taimatsu": "taimatsu.png",
+        "Tachikiri": "tachikiri.png",
+        "Tetsugan": "tetsugan.png",
+        "Tobizaru": "tobizaru.png",
+        "Touketsu": "touketsu.png",
+        "Ulqui": "ulqui.png",
+        "Uno Ban": "uno_ban.png",
+        "Yubashiri": "yubashiri.png",
+        "Zaraki": "zaraki.png",
+        "Guren": "guren.png",
+        "Fushikiri": "fushikiri.png",
+        "Gekko": "gekko.png",
+        "Masamune": "masamune.png",
+        "Zetsumei": "zetsumei.png",
+        "Satsuriku": "satsuriku.png",
+        "Rivière Sanglante": "riviere_sanglante.png",
+        "Kurozetsu": "kurozetsu.png",
+        "Yurei": "yurei.png",
+        "Yukionna": "yukionna.png",
+        "Yamainu": "yamainu.png",
+        "Yamikiri": "yamikiri.png",
+        "Usuba": "usuba.png"
+      }
+    };
+
+    const grid = document.getElementById("grid");
+    const count = document.getElementById("count");
+
+    // Object.entries() -> [["Amatsu","amatsu.png"], ["Argent","argent.png"], ...]
+    const entries = Object.entries(data.icons);
+
+    // Tri alpha par nom lisible (clé)
+    entries.sort(([nameA], [nameB]) =>
+      nameA.localeCompare(nameB, "fr", { sensitivity: "base" })
+    );
+
+    entries.forEach(([displayName, fileName]) => {
+      const card = document.createElement("div");
+      card.className = "item";
+
+      card.innerHTML = `
+        <div class="thumb-wrap">
+          <img src="./${fileName}" alt="${displayName}" />
+        </div>
+        <div class="filename">${displayName}</div>
+        <div class="techname">${fileName}</div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    count.textContent = entries.length + " assets";
+  </script>
+</body>
+</html>
